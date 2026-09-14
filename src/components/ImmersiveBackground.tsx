@@ -4,12 +4,14 @@ import Image from "next/image"
 import { motion, useReducedMotion, useScroll, useTransform } from "motion/react"
 import { useCallback, useState } from "react"
 
-const SUNSET_SEQUENCE_WEBM = "/harbour-animation/harbour-sunset-transition.webm?v=locked-30fps-1"
-const SUNSET_SEQUENCE_MP4 = "/harbour-animation/harbour-sunset-transition.mp4?v=locked-30fps-1"
-const EVENING_LOOP_WEBM = "/harbour-animation/harbour-evening-loop.webm?v=locked-30fps-1"
-const EVENING_LOOP_MP4 = "/harbour-animation/harbour-evening-loop.mp4?v=locked-30fps-1"
-const SUNSET_POSTER = "/miras-sydney-harbour-sunset.png"
-const STATIC_FALLBACK = "/miras-sydney-harbour-evening.png"
+const SUNSET_SEQUENCE_DESKTOP = "/harbour-animation/harbour-sunset-transition-v2.mp4?v=motion-6"
+const SUNSET_SEQUENCE_MOBILE = "/harbour-animation/harbour-sunset-transition-mobile-v2.mp4?v=motion-6"
+const EVENING_LOOP_DESKTOP = "/harbour-animation/harbour-evening-loop-v2.mp4?v=motion-6"
+const EVENING_LOOP_MOBILE = "/harbour-animation/harbour-evening-loop-mobile-v2.mp4?v=motion-6"
+const SUNSET_POSTER_DESKTOP = "/miras-hero-sunset-v2.webp"
+const SUNSET_POSTER_MOBILE = "/miras-hero-sunset-mobile-v2.webp"
+const EVENING_POSTER_DESKTOP = "/miras-hero-evening-v2.webp"
+const EVENING_POSTER_MOBILE = "/miras-hero-evening-mobile-v2.webp"
 
 type ScenePhase = "sunset" | "evening"
 
@@ -30,42 +32,54 @@ export function ImmersiveBackground() {
     >
       <div className="absolute inset-0">
         <div className="absolute inset-0">
-          {reduce || animationFailed ? (
-            <Image
-              src={STATIC_FALLBACK}
-              alt=""
-              fill
-              priority
-              sizes="100vw"
-              className="object-cover object-center"
-            />
-          ) : (
+          <Image
+            src={phase === "sunset" ? SUNSET_POSTER_MOBILE : EVENING_POSTER_MOBILE}
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover object-center md:hidden"
+          />
+          <Image
+            src={phase === "sunset" ? SUNSET_POSTER_DESKTOP : EVENING_POSTER_DESKTOP}
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="hidden object-cover object-center md:block"
+          />
+          {reduce || animationFailed ? null : (
             <>
               <video
-                poster={STATIC_FALLBACK}
                 autoPlay
                 muted
                 loop
                 playsInline
                 preload="auto"
-                className={`absolute inset-0 h-full w-full object-cover object-center ${phase === "evening" ? "opacity-100" : "opacity-0"}`}
+                className={`absolute inset-0 h-full w-full object-cover object-center transition-opacity duration-[1600ms] ease-in-out ${phase === "evening" ? "opacity-100" : "opacity-0"}`}
                 onError={() => setAnimationFailed(true)}
               >
-                <source src={EVENING_LOOP_WEBM} type="video/webm" />
-                <source src={EVENING_LOOP_MP4} type="video/mp4" />
+                <source media="(max-width: 767px)" src={EVENING_LOOP_MOBILE} type="video/mp4" />
+                <source src={EVENING_LOOP_DESKTOP} type="video/mp4" />
               </video>
               <video
-                poster={SUNSET_POSTER}
                 autoPlay
                 muted
                 playsInline
                 preload="auto"
-                className={`absolute inset-0 h-full w-full object-cover object-center ${phase === "sunset" ? "opacity-100" : "opacity-0"}`}
+                className={`absolute inset-0 h-full w-full object-cover object-center transition-opacity duration-[1600ms] ease-in-out ${phase === "sunset" ? "opacity-100" : "opacity-0"}`}
+                onTimeUpdate={(event) => {
+                  const video = event.currentTarget
+
+                  if (video.duration - video.currentTime <= 1.6) {
+                    setPhase("evening")
+                  }
+                }}
                 onEnded={handleSequenceEnded}
                 onError={() => setAnimationFailed(true)}
               >
-                <source src={SUNSET_SEQUENCE_WEBM} type="video/webm" />
-                <source src={SUNSET_SEQUENCE_MP4} type="video/mp4" />
+                <source media="(max-width: 767px)" src={SUNSET_SEQUENCE_MOBILE} type="video/mp4" />
+                <source src={SUNSET_SEQUENCE_DESKTOP} type="video/mp4" />
               </video>
             </>
           )}

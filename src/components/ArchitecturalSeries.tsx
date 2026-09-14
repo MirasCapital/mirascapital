@@ -6,20 +6,20 @@ import { motion, useReducedMotion } from "motion/react"
 
 const images = [
   {
-    src: "/miras-opera-detail.png",
-    alt: "Architectural detail of the Sydney Opera House sails",
+    src: "/miras-architecture-opera-v2.webp",
+    alt: "Illuminated tiled sail rising against a deep navy sky",
   },
   {
-    src: "/miras-sydney-bridge-detail.webp",
-    alt: "Steel structure and rivets of the Sydney Harbour Bridge at blue hour",
+    src: "/miras-architecture-steel-v2.webp",
+    alt: "Riveted steel bridge structure illuminated at blue hour",
   },
   {
-    src: "/miras-barangaroo-geometry.webp",
-    alt: "Sandstone and glass architecture on the Sydney waterfront at blue hour",
+    src: "/miras-architecture-stone-v2.webp",
+    alt: "Sandstone and dark glass architectural geometry at blue hour",
   },
   {
-    src: "/miras-anzac-bridge-detail.webp",
-    alt: "Concrete pylon and cables of Sydney's Anzac Bridge at blue hour",
+    src: "/miras-architecture-cables-v2.webp",
+    alt: "Concrete bridge pylon and cable geometry at blue hour",
   },
 ]
 
@@ -68,7 +68,7 @@ export function ArchitecturalSeries() {
               alt={isActive ? image.alt : ""}
               fill
               priority={index === 0}
-              sizes="(min-width: 1024px) 50vw, 100vw"
+              sizes="(min-width: 1536px) 720px, (min-width: 1024px) 50vw, 100vw"
               className="object-cover"
             />
           </motion.div>
