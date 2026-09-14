@@ -2,12 +2,12 @@
 
 import Image from "next/image"
 import { motion, useReducedMotion, useScroll, useTransform } from "motion/react"
-import { useCallback, useState } from "react"
+import { useCallback, useRef, useState } from "react"
 
-const SUNSET_SEQUENCE_DESKTOP = "/harbour-animation/harbour-sunset-transition-v2.mp4?v=motion-6"
-const SUNSET_SEQUENCE_MOBILE = "/harbour-animation/harbour-sunset-transition-mobile-v2.mp4?v=motion-6"
-const EVENING_LOOP_DESKTOP = "/harbour-animation/harbour-evening-loop-v2.mp4?v=motion-6"
-const EVENING_LOOP_MOBILE = "/harbour-animation/harbour-evening-loop-mobile-v2.mp4?v=motion-6"
+const SUNSET_SEQUENCE_DESKTOP = "/harbour-animation/harbour-sunset-transition-v3.mp4"
+const SUNSET_SEQUENCE_MOBILE = "/harbour-animation/harbour-sunset-transition-mobile-v3.mp4"
+const EVENING_LOOP_DESKTOP = "/harbour-animation/harbour-evening-loop-v3.mp4"
+const EVENING_LOOP_MOBILE = "/harbour-animation/harbour-evening-loop-mobile-v3.mp4"
 const SUNSET_POSTER_DESKTOP = "/miras-hero-sunset-v2.webp"
 const SUNSET_POSTER_MOBILE = "/miras-hero-sunset-mobile-v2.webp"
 const EVENING_POSTER_DESKTOP = "/miras-hero-evening-v2.webp"
@@ -16,6 +16,7 @@ const EVENING_POSTER_MOBILE = "/miras-hero-evening-mobile-v2.webp"
 type ScenePhase = "sunset" | "evening"
 
 export function ImmersiveBackground() {
+  const eveningVideoRef = useRef<HTMLVideoElement>(null)
   const { scrollYProgress } = useScroll()
   const reduce = useReducedMotion()
   const [phase, setPhase] = useState<ScenePhase>("sunset")
@@ -51,11 +52,11 @@ export function ImmersiveBackground() {
           {reduce || animationFailed ? null : (
             <>
               <video
-                autoPlay
+                ref={eveningVideoRef}
                 muted
                 loop
                 playsInline
-                preload="auto"
+                preload="metadata"
                 className={`absolute inset-0 h-full w-full object-cover object-center transition-opacity duration-[1600ms] ease-in-out ${phase === "evening" ? "opacity-100" : "opacity-0"}`}
                 onError={() => setAnimationFailed(true)}
               >
@@ -71,7 +72,14 @@ export function ImmersiveBackground() {
                 onTimeUpdate={(event) => {
                   const video = event.currentTarget
 
-                  if (video.duration - video.currentTime <= 1.6) {
+                  if (phase === "sunset" && video.duration - video.currentTime <= 1.6) {
+                    const eveningVideo = eveningVideoRef.current
+
+                    if (eveningVideo) {
+                      eveningVideo.currentTime = 0
+                      void eveningVideo.play()
+                    }
+
                     setPhase("evening")
                   }
                 }}
