@@ -14,9 +14,9 @@ const ACCESS_KEY = "087fba1e-6e92-4fc4-9e2d-1d626a0bea5e"
 type Status = "idle" | "sending" | "ok" | "error"
 
 const inputClass =
-  "peer w-full rounded-2xl border border-cloud/14 bg-cloud/[0.035] px-5 pb-3 pt-7 text-[15px] text-cloud outline-none transition-[background-color,border-color,box-shadow] duration-200 hover:border-cloud/28 focus:border-accent/70 focus:bg-cloud/[0.055] focus:ring-4 focus:ring-accent/10"
+  "peer w-full rounded-sm border border-cloud/20 bg-cloud/[0.035] px-4 pb-3 pt-7 text-[15px] text-cloud outline-none transition-[background-color,border-color,box-shadow] duration-200 hover:border-cloud/32 focus:border-accent/80 focus:bg-cloud/[0.055] focus:ring-2 focus:ring-accent/15"
 const labelClass =
-  "pointer-events-none absolute left-5 top-2.5 origin-left text-[0.67rem] font-medium tracking-[0.02em] text-cloud/45 transition-[color,font-size,transform,top] duration-200 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-[15px] peer-placeholder-shown:font-normal peer-placeholder-shown:text-cloud/42 peer-focus:top-2.5 peer-focus:translate-y-0 peer-focus:text-[0.67rem] peer-focus:font-medium peer-focus:text-accent"
+  "pointer-events-none absolute left-4 top-2.5 origin-left text-[0.67rem] font-medium tracking-[0.02em] text-cloud/62 transition-[color,font-size,transform,top] duration-200 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-[15px] peer-placeholder-shown:font-normal peer-placeholder-shown:text-cloud/62 peer-focus:top-2.5 peer-focus:translate-y-0 peer-focus:text-[0.67rem] peer-focus:font-medium peer-focus:text-accent-bright"
 
 function Field({
   id,
@@ -108,7 +108,7 @@ export function ContactForm() {
       <button
         type="submit"
         disabled={sending}
-        className="group mt-2 inline-flex w-full items-center justify-center gap-3 rounded-full bg-accent px-6 py-4 text-sm font-semibold text-ink transition-[background-color,transform,opacity] duration-200 ease-out hover:bg-accent-bright active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-65"
+        className="group mt-2 inline-flex w-full items-center justify-center gap-3 rounded-sm bg-accent px-6 py-4 text-sm font-semibold text-ink transition-[background-color,transform,opacity] duration-200 ease-out hover:bg-accent-bright active:translate-y-px disabled:cursor-not-allowed disabled:opacity-65"
       >
         {sending ? "Sending" : "Start the conversation"}
         {sending ? (
@@ -129,7 +129,7 @@ export function ContactForm() {
           initial={reduce ? false : { opacity: 0, transform: "translateY(6px)" }}
           animate={{ opacity: 1, transform: "translateY(0px)" }}
           transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
-          className={`flex items-center gap-2.5 rounded-2xl border px-4 py-3 text-sm ${
+          className={`flex items-center gap-2.5 rounded-sm border px-4 py-3 text-sm ${
             ok
               ? "border-accent/30 bg-accent/10 text-accent-bright"
               : "border-[#f1957f]/40 bg-[#f1957f]/10 text-[#f4a18d]"

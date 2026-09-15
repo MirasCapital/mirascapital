@@ -95,10 +95,7 @@ export default function Home() {
 
           <div className="lg:col-span-5 lg:col-start-8 lg:pt-14">
             <Reveal>
-              <p className="text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-accent">
-                What we do
-              </p>
-              <h2 className="mt-7 max-w-[13ch] font-serif text-[2.5rem] leading-[1.05] tracking-[-0.01em] text-balance sm:text-[4.1rem]">
+              <h2 className="max-w-[13ch] font-serif text-[2.5rem] leading-[1.05] tracking-[-0.01em] text-balance sm:text-[4.1rem]">
                 <span className="whitespace-nowrap">Senior-led</span> advice. Investor mindset.
               </h2>
               <p className="mt-8 max-w-[38rem] text-[1.05rem] leading-[1.7] tracking-[-0.005em] text-cloud/68 sm:text-[1.2rem]">
@@ -145,37 +142,35 @@ export default function Home() {
       </section>
 
       <section className="relative z-10 bg-ink px-5 py-28 sm:px-8 sm:py-36 lg:px-12 lg:py-44">
-        <div className="mx-auto grid max-w-[1440px] gap-14 lg:grid-cols-12 lg:gap-8">
-          <Reveal className="lg:col-span-7">
-            <p className="mb-8 text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-accent">
-              Aligned interests
-            </p>
-            <h2 className="max-w-[13ch] font-serif text-[3.3rem] leading-[1.05] tracking-[-0.01em] text-balance sm:text-[5rem]">
+        <div className="mx-auto max-w-[1440px] border-y border-cloud/12 py-10 sm:py-14 lg:py-20">
+          <Reveal>
+            <h2 className="max-w-[16ch] font-serif text-[3.6rem] leading-[0.98] tracking-[-0.015em] text-balance sm:text-[5.8rem] lg:text-[7.4rem]">
               Advice built around the outcome.
             </h2>
           </Reveal>
 
-          <Reveal delay={0.08} className="lg:col-span-4 lg:col-start-9 lg:pt-28">
-            <p className="text-[1.05rem] leading-[1.7] tracking-[-0.005em] text-cloud/70 sm:text-xl">
+          <div className="mt-14 grid gap-8 border-t border-cloud/12 pt-10 sm:mt-20 sm:grid-cols-2 sm:gap-12 lg:mt-24 lg:grid-cols-12 lg:gap-8 lg:pt-12">
+            <Reveal className="sm:max-w-[34rem] lg:col-span-4 lg:col-start-5">
+              <p className="text-[1.05rem] leading-[1.7] tracking-[-0.005em] text-cloud/72 sm:text-xl">
               We prioritise aligned interests and long-term trusted-advisor partnerships.
-            </p>
-            <p className="mt-7 text-[1.05rem] leading-[1.7] tracking-[-0.005em] text-cloud/70 sm:text-xl">
+              </p>
+            </Reveal>
+            <Reveal delay={0.08} className="sm:max-w-[34rem] lg:col-span-4 lg:col-start-9">
+              <p className="text-[1.05rem] leading-[1.7] tracking-[-0.005em] text-cloud/72 sm:text-xl">
               Our flexible fee structures often include equity participation, keeping our interests connected to the value created beyond a transaction.
-            </p>
-          </Reveal>
+              </p>
+            </Reveal>
+          </div>
         </div>
       </section>
 
       <section id="contact" className="relative z-10 bg-smoke px-5 pt-28 sm:px-8 sm:pt-36 lg:px-12 lg:pt-44">
         <div className="mx-auto grid max-w-[1440px] gap-16 border-b border-cloud/12 pb-28 lg:grid-cols-12 lg:gap-8 lg:pb-36">
           <Reveal className="lg:col-span-6">
-            <p className="mb-8 text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-accent">
-              Start a conversation
-            </p>
             <h2 className="max-w-[10ch] font-serif text-[3.3rem] leading-[1.05] tracking-[-0.01em] text-balance sm:text-[5rem]">
               Your first move shapes the game.
             </h2>
-            <p className="mt-9 max-w-sm text-[1.05rem] leading-[1.7] tracking-[-0.005em] text-cloud/48 sm:text-xl">
+            <p className="mt-9 max-w-sm text-[1.05rem] leading-[1.7] tracking-[-0.005em] text-cloud/70 sm:text-xl">
               Tell us your goals, and together we&apos;ll help you make them happen.
             </p>
           </Reveal>
@@ -184,7 +179,7 @@ export default function Home() {
           </Reveal>
         </div>
 
-        <footer className="mx-auto flex max-w-[1440px] flex-col gap-5 py-8 text-xs text-cloud/42 sm:flex-row sm:items-center sm:justify-between">
+        <footer className="mx-auto flex max-w-[1440px] flex-col gap-5 py-8 text-xs text-cloud/62 sm:flex-row sm:items-center sm:justify-between">
           <span>© {new Date().getFullYear()} Miras Capital</span>
           <div className="flex gap-6">
             <a href="#top" className="transition-colors duration-200 hover:text-cloud">Back to top</a>
