@@ -68,6 +68,14 @@ textarea:-webkit-autofill:focus {
   transition: color 200ms ease;
 }
 
+@media (min-width: 1600px) {
+  .tombstone-grid {
+    max-width: 1440px;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 24px;
+  }
+}
+
 @media (hover: hover) and (pointer: fine) {
   .capability-row:hover h3 {
     color: #f18a35;

@@ -21,7 +21,7 @@ function Tombstone({ deal }: { deal: Deal }) {
           src={deal.logo}
           alt={deal.alt}
           draggable={false}
-          className="h-20 w-auto max-w-[185px] object-contain mix-blend-multiply sm:h-28 sm:max-w-[280px]"
+          className="h-20 w-auto max-w-[185px] object-contain mix-blend-multiply sm:h-28 sm:max-w-[280px] min-[1600px]:max-w-[220px]"
         />
         <span className="max-w-[24ch] text-center font-serif text-[1.15rem] italic leading-snug text-ink/58 sm:text-[1.3rem]">
           {deal.type}
@@ -32,7 +32,7 @@ function Tombstone({ deal }: { deal: Deal }) {
             src={deal.counter}
             alt={deal.counterAlt ?? ""}
             draggable={false}
-            className="h-16 w-auto max-w-[175px] object-contain mix-blend-multiply sm:h-24 sm:max-w-[250px]"
+            className="h-16 w-auto max-w-[175px] object-contain mix-blend-multiply sm:h-24 sm:max-w-[250px] min-[1600px]:max-w-[190px]"
           />
         )}
       </div>
@@ -143,7 +143,7 @@ export function TransactionCards({ transactions }: { transactions: Deal[] }) {
   return (
     <div className="mt-16 lg:mt-24">
       <MobileCarousel transactions={transactions} />
-      <div className="mx-auto hidden max-w-[920px] gap-6 sm:grid sm:grid-cols-2 lg:gap-8">
+      <div className="tombstone-grid mx-auto hidden max-w-[920px] gap-6 sm:grid sm:grid-cols-2 lg:gap-8">
         {transactions.map((deal, index) => (
           <motion.div
             key={deal.alt}
