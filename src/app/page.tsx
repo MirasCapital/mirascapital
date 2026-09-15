@@ -132,7 +132,7 @@ export default function Home() {
                 Recent transactions.
               </h2>
             </div>
-            <p className="max-w-md self-end text-[1.05rem] leading-[1.7] tracking-[-0.005em] text-cloud/50 sm:text-xl lg:col-span-3 lg:col-start-10">
+            <p className="max-w-md self-end text-[1.05rem] leading-[1.7] tracking-[-0.005em] text-cloud/62 sm:text-xl lg:col-span-3 lg:col-start-10">
               Selected work across mergers and acquisitions, capital raisings and strategic advice.
             </p>
           </Reveal>

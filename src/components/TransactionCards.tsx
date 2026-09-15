@@ -14,23 +14,30 @@ export type Deal = {
 
 function Tombstone({ deal }: { deal: Deal }) {
   return (
-    <article className="group flex h-full min-h-[330px] flex-col bg-white p-7 text-ink shadow-[0_24px_70px_rgba(0,0,0,0.2)] ring-1 ring-ink/5 transition-transform duration-200 ease-out [@media(hover:hover)]:hover:-translate-y-1">
-      <div className="flex flex-1 flex-col items-center justify-center gap-5">
+    <article className="flex h-full min-h-[360px] flex-col bg-cloud p-7 text-ink shadow-[0_22px_60px_rgba(0,10,20,0.18)] ring-1 ring-inset ring-ink/10 sm:min-h-[430px] sm:p-10 lg:min-h-[470px] lg:p-12">
+      <div className="flex flex-1 flex-col items-center justify-center gap-6">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={deal.logo} alt={deal.alt} draggable={false} className="h-20 w-auto max-w-[200px] object-contain" />
-        <span className="text-center text-sm italic text-neutral-500">{deal.type}</span>
+        <img
+          src={deal.logo}
+          alt={deal.alt}
+          draggable={false}
+          className="h-20 w-auto max-w-[185px] object-contain mix-blend-multiply sm:h-28 sm:max-w-[280px]"
+        />
+        <span className="max-w-[24ch] text-center font-serif text-[1.15rem] italic leading-snug text-ink/58 sm:text-[1.3rem]">
+          {deal.type}
+        </span>
         {deal.counter && (
           // eslint-disable-next-line @next/next/no-img-element
           <img
             src={deal.counter}
             alt={deal.counterAlt ?? ""}
             draggable={false}
-            className="h-[72px] w-auto max-w-[180px] object-contain"
+            className="h-16 w-auto max-w-[175px] object-contain mix-blend-multiply sm:h-24 sm:max-w-[250px]"
           />
         )}
       </div>
-      <div className="mt-6 flex items-center justify-center border-t border-ink/8 pt-5">
-        <span className="font-mono text-[0.64rem] uppercase tracking-[0.18em] text-neutral-400">
+      <div className="mt-8 flex items-center justify-center border-t border-ink/10 pt-6">
+        <span className="text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-ink/45">
           {deal.year}
         </span>
       </div>
@@ -50,10 +57,14 @@ function MobileCarousel({ transactions }: { transactions: Deal[] }) {
     let locked = false
 
     const recenter = () => {
-      block = element.scrollWidth / 3
+      const middleCard = element.children[transactions.length] as HTMLElement | undefined
+      const nextCycleCard = element.children[transactions.length * 2] as HTMLElement | undefined
+      if (!middleCard || !nextCycleCard) return
+      block = nextCycleCard.offsetLeft - middleCard.offsetLeft
       if (block <= 0) return
+      const inlineInset = Number.parseFloat(getComputedStyle(element).paddingInlineStart) || 0
       locked = true
-      element.scrollLeft = block
+      element.scrollLeft = middleCard.offsetLeft - inlineInset * 2
       requestAnimationFrame(() => { locked = false })
     }
     recenter()
@@ -115,10 +126,10 @@ function MobileCarousel({ transactions }: { transactions: Deal[] }) {
       onPointerUp={endMouseDrag}
       onPointerCancel={endMouseDrag}
       onDragStart={(event) => event.preventDefault()}
-      className="-mx-5 flex cursor-grab snap-x snap-mandatory gap-4 overflow-x-auto overscroll-x-contain px-5 pb-4 select-none active:cursor-grabbing [scrollbar-width:none] [-webkit-overflow-scrolling:touch] sm:hidden [&::-webkit-scrollbar]:hidden"
+      className="flex cursor-grab snap-x snap-mandatory gap-4 overflow-x-auto overscroll-x-contain pb-4 select-none active:cursor-grabbing [scrollbar-width:none] [-webkit-overflow-scrolling:touch] sm:hidden [&::-webkit-scrollbar]:hidden"
     >
       {loop.map((deal, index) => (
-        <div key={`${deal.alt}-${index}`} className="w-[270px] shrink-0 snap-center snap-always">
+        <div key={`${deal.alt}-${index}`} className="w-[78vw] max-w-[310px] shrink-0 snap-start snap-always">
           <Tombstone deal={deal} />
         </div>
       ))}
@@ -132,7 +143,7 @@ export function TransactionCards({ transactions }: { transactions: Deal[] }) {
   return (
     <div className="mt-16 lg:mt-24">
       <MobileCarousel transactions={transactions} />
-      <div className="hidden gap-5 sm:grid sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
+      <div className="mx-auto hidden max-w-[920px] gap-6 sm:grid sm:grid-cols-2 lg:gap-8">
         {transactions.map((deal, index) => (
           <motion.div
             key={deal.alt}
