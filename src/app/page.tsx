@@ -150,12 +150,12 @@ export default function Home() {
           </Reveal>
 
           <div className="mt-14 grid gap-8 border-t border-cloud/12 pt-10 sm:mt-20 sm:grid-cols-2 sm:gap-12 lg:mt-24 lg:grid-cols-12 lg:gap-8 lg:pt-12">
-            <Reveal className="sm:max-w-[34rem] lg:col-span-4 lg:col-start-5">
+            <Reveal className="sm:max-w-[34rem] lg:col-span-4 lg:col-start-2">
               <p className="text-[1.05rem] leading-[1.7] tracking-[-0.005em] text-cloud/72 sm:text-xl">
               We prioritise aligned interests and long-term trusted-advisor partnerships.
               </p>
             </Reveal>
-            <Reveal delay={0.08} className="sm:max-w-[34rem] lg:col-span-4 lg:col-start-9">
+            <Reveal delay={0.08} className="sm:max-w-[34rem] lg:col-span-4 lg:col-start-7">
               <p className="text-[1.05rem] leading-[1.7] tracking-[-0.005em] text-cloud/72 sm:text-xl">
               Our flexible fee structures often include equity participation, keeping our interests connected to the value created beyond a transaction.
               </p>
