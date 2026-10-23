@@ -50,9 +50,61 @@ const advisoryServices = [
   },
 ]
 
+// schema.org description of the firm for search engines and AI assistants.
+// Services are derived from `advisoryServices` so the two never drift apart.
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": ["Organization", "ProfessionalService"],
+      "@id": "https://www.mirascapital.com/#organization",
+      name: "Miras Capital",
+      url: "https://www.mirascapital.com/",
+      logo: "https://www.mirascapital.com/android-chrome-512x512.png",
+      image: "https://www.mirascapital.com/miras-cover-art.png",
+      description:
+        "Miras Capital is an independent advisory and investment firm specialising in mergers and acquisitions, capital raisings, industry roll-ups and strategic advisory services.",
+      areaServed: { "@type": "Country", name: "Australia" },
+      knowsAbout: [
+        "Mergers and acquisitions",
+        "Capital raising",
+        "Industry roll-ups",
+        "Strategic advisory",
+        "Divestments",
+      ],
+      hasOfferCatalog: {
+        "@type": "OfferCatalog",
+        name: "Advisory services",
+        itemListElement: advisoryServices.map((service) => ({
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: service.title,
+            description: service.body,
+            provider: { "@id": "https://www.mirascapital.com/#organization" },
+          },
+        })),
+      },
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://www.mirascapital.com/#website",
+      url: "https://www.mirascapital.com/",
+      name: "Miras Capital",
+      inLanguage: "en-AU",
+      publisher: { "@id": "https://www.mirascapital.com/#organization" },
+    },
+  ],
+}
+
 export default function Home() {
   return (
     <main className="relative overflow-clip bg-ink text-cloud">
+      <script
+        type="application/ld+json"
+        // Escape "<" so the JSON can never close the script tag early.
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, "\\u003c") }}
+      />
       <SiteNav />
       <ImmersiveBackground />
 
